@@ -11,7 +11,7 @@ jobs:
 # this is the name of jobs 
   greet:
     runs-on: ubuntu-latest
-      steps:
+    steps:
       - name: say hello to users
          run: echo "Hello Dosto"
 
