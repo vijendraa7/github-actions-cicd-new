@@ -1,19 +1,19 @@
-# this is workflow name 
-name: Hello 
-# runs on a trigger
-on :        
-  push : 
-   branches: [main]
+name: Hello First Workflow
 
-# There are jobs inside the workflow
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:   # ← lets you run it manually too
+
 jobs:
-
-# this is the name of jobs 
-  greet:
+  say-hello:
     runs-on: ubuntu-latest
+    
     steps:
-      -name: say hello to users
-        run: echo "Hello Dosto"
+      - name: Greet everyone
+        run: echo "Hello Dost!"
 
-      -name: say hello to username
-         run : echo "Hello $USER"
+      - name: Show current user
+        run: echo "Hello $USER"
