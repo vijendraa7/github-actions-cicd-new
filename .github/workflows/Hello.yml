@@ -1,35 +1,41 @@
-name: Hello Workflow
+name: CICCD
 
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-  workflow_dispatch:     # ← allows you to run it manually from the Actions tab
+  workflow_dispatch:    # Allows manual trigger from Actions tab
 
 jobs:
-  say-hello:
+  code:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Greet everyone
-        run: echo "Hello Dost!"
+      - name: Checkout code
+        uses: actions/checkout@v4     # ← Very important: gets your repo files
 
-      - name: Show current user
-        run: echo "Hello $USER"
+      - name: Echo clone message
+        run: echo "Code Clone from GitHub"
 
-      - name: Show versions of Python, Docker, etc.
-        run: |
-          echo "=== Python versions ==="
-          python3 --version  || echo "python3 not found"
-          python --version   || echo "python alias not found"
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code   # usually needed again if previous job didn't share workspace
+        uses: actions/checkout@v4
 
-          echo ""
-          echo "=== Docker ==="
-          docker --version   || echo "Docker is NOT pre-installed on this runner"
+      - name: Build Docker Container
+        run: echo "Docker Container build"
 
-          echo ""
-          echo "=== Other common tools ==="
-          node --version     || echo "Node not found"
-          npm --version      || echo "npm not found"
-          echo "Git version: $(git --version)"
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Test the container
+        run: echo "Testing the container"
+
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploying the app
+        run: echo "Docker compose deployed the app"
