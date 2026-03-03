@@ -1,22 +1,35 @@
-name: Hello First Workflow
+name: Hello Workflow
+
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
   pull_request:
-    branches:
-      - main
-  workflow_dispatch: null
+    branches: [ main ]
+  workflow_dispatch:     # ← allows you to run it manually from the Actions tab
+
 jobs:
   say-hello:
     runs-on: ubuntu-latest
+
     steps:
       - name: Greet everyone
         run: echo "Hello Dost!"
+
       - name: Show current user
         run: echo "Hello $USER"
-details:
-  runs-on: ubuntu-latest
-  steps:
-    - name: show what is the version of python docker,etc
-      run: docker --version && python --version
+
+      - name: Show versions of Python, Docker, etc.
+        run: |
+          echo "=== Python versions ==="
+          python3 --version  || echo "python3 not found"
+          python --version   || echo "python alias not found"
+
+          echo ""
+          echo "=== Docker ==="
+          docker --version   || echo "Docker is NOT pre-installed on this runner"
+
+          echo ""
+          echo "=== Other common tools ==="
+          node --version     || echo "Node not found"
+          npm --version      || echo "npm not found"
+          echo "Git version: $(git --version)"
