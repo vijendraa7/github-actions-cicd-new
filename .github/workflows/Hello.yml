@@ -2,7 +2,7 @@ name: Hello First Workflow
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main]
   pull_request:
     branches: [ main ]
   workflow_dispatch:   # ← lets you run it manually too
@@ -17,3 +17,10 @@ jobs:
 
       - name: Show current user
         run: echo "Hello $USER"
+
+details:
+  runs-on: ubuntu-latest
+  steps: 
+    - name: show what is the version of python docker,etc
+      run: docker --version && python --version
+  
