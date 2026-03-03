@@ -1,30 +1,41 @@
 name: CICCD
 
-# This workflow runs manually when you click "Run workflow" (Re-run jobs) in the Actions tab
 on:
-  workflow_dispatch:
+  workflow_dispatch:    # Allows manual trigger from Actions tab
 
 jobs:
   code:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
+        uses: actions/checkout@v4     # ← Very important: gets your repo files
+
+      - name: Echo clone message
         run: echo "Code Clone from GitHub"
 
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code   # usually needed again if previous job didn't share workspace
+        uses: actions/checkout@v4
+
       - name: Build Docker Container
         run: echo "Docker Container build"
 
   test:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Test the container
         run: echo "Testing the container"
 
   deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Deploying the app
         run: echo "Docker compose deployed the app"
