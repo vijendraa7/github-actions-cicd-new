@@ -1,26 +1,22 @@
 name: Hello First Workflow
-
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
   pull_request:
-    branches: [ main ]
-  workflow_dispatch:   # ← lets you run it manually too
-
+    branches:
+      - main
+  workflow_dispatch: null
 jobs:
   say-hello:
     runs-on: ubuntu-latest
-    
     steps:
       - name: Greet everyone
         run: echo "Hello Dost!"
-
       - name: Show current user
         run: echo "Hello $USER"
-
 details:
   runs-on: ubuntu-latest
-  steps: 
+  steps:
     - name: show what is the version of python docker,etc
       run: docker --version && python --version
-  
