@@ -2,7 +2,7 @@ name: Hello First Workflow
 
 on:
   push:
-    branches: [ main]
+    branches: [ main ]
   pull_request:
     branches: [ main ]
   workflow_dispatch:   # ← lets you run it manually too
